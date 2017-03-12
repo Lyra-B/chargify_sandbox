@@ -1,0 +1,9 @@
+{
+  "subscription": {
+    "credit_card_attributes": {
+      "full_number": "123",
+      "expiration_month": "string (optional)",
+      "expiration_year": "string (optional)"
+    }
+  }
+}
