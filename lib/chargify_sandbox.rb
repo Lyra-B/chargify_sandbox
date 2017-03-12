@@ -6,39 +6,35 @@ require 'chargify_api_ares'
 module ChargifySandbox
   class FakeApi < Sinatra::Base
     get '/subscriptions.json' do
-      content_type :json
-      fixture('subscriptions')
-    end
-
-    get '/customers/:id/subscriptions.json' do
-      content_type :json
+      render :json, 'subscriptions'
     end
 
     get '/subscriptions/:id' do
-      content_type :json
-      fixture('subscription')
+      render :json, 'subscription'
     end
 
     post '/subscriptions.json' do
-      content_type :json
-      fixture('subscription')
+      render :json, 'subscription'
     end
 
     put '/subscriptions/:id.json' do
-      content_type :json
-      fixture('updated_subscription')
+      render :json, 'updated_subscription'
     end
 
     delete '/subscriptions/:id' do
-      content_type :json
-      fixture('cancelled_subscription')
+      render :json, 'cancelled_subscription'
     end
 
     private
 
-    def fixture(name)
+    def render(type, filename)
+      content_type(type)
+      fixture(filename, type)
+    end
+
+    def fixture(filename, type)
       gem_dir = File.dirname(File.expand_path(__FILE__))
-      fixtures_path = File.join(gem_dir, "fixtures", "#{name}.json")
+      fixtures_path = File.join(gem_dir, "fixtures", "#{filename}.#{type}")
       File.open(fixtures_path).read
     end
   end
