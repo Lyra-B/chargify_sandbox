@@ -37,14 +37,19 @@ module ChargifySandbox
     private
 
     def fixture(name)
-      File.open("./spec/fixtures/#{name}.json").read
+      gem_dir = File.dirname(File.expand_path(__FILE__))
+      fixtures_path = File.join(gem_dir, "fixtures", "#{name}.json")
+      File.open(fixtures_path).read
     end
+  end
+
+  def self.boot
+    Capybara::Discoball::Runner.new(FakeApi) do |server|
+      Chargify.configure do |c|
+        c.site = server.url
+        c.format = :json
+      end
+    end.boot
   end
 end
 
-Capybara::Discoball::Runner.new(ChargifySandbox::FakeApi) do |server|
-  Chargify.configure do |c|
-    c.site = server.url
-    c.format = :json
-  end
-end.boot

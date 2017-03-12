@@ -9,6 +9,10 @@ describe 'ChargifySandbox' do
     ChargifySandbox::FakeApi.new
   end
 
+  before do
+    ChargifySandbox.boot
+  end
+
   describe 'Subscriptions' do
     describe 'GET /subscriptions.json' do
       it 'returns all subscriptions' do
