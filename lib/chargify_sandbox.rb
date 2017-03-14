@@ -25,6 +25,34 @@ module ChargifySandbox
       render :json, 'cancelled_subscription'
     end
 
+    get '/customers.json' do
+      render :json, 'customers'
+    end
+
+    get '/customers/lookup.json' do
+      render :json, 'customer'
+    end
+
+    get '/customers/:id.json' do
+      render :json, 'customer'
+    end
+
+    post '/customers.json' do
+      render :json, 'customer'
+    end
+
+    put '/customers/:id.json' do
+      render :json, 'customer'
+    end
+
+    delete '/customers/:id.json' do
+      render :json, 'customer'
+    end
+
+    get '/customers/:id/subscriptions.json' do
+      render :json , 'customer_subscriptions'
+    end
+
     private
 
     def render(type, filename)

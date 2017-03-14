@@ -1,0 +1,25 @@
+{
+  "customer": {
+    "first_name": "non",
+    "last_name": "Ut consequat in",
+    "email": "pariatur",
+    "cc_emails": "ipsum sit sunt",
+    "organization": "anim aute enim dolore in",
+    "reference": 12345,
+    "id": 95274396,
+    "created_at": "dolor cupidatat anim culpa",
+    "updated_at": "sit elit in Lorem officia",
+    "address": "magna irure",
+    "address_2": "dolore deserunt",
+    "city": "elit nostrud ad",
+    "state": "sint eu Excepteur amet",
+    "zip": "aliquip Excepteur occaecat pariatur eiusmod",
+    "country": "pariatur dolore",
+    "phone": "eu eiusmod laboris aliqua ullamco",
+    "verified": null,
+    "portal_customer_created_at": "ali",
+    "portal_invite_last_sent_at": "labore exercitation reprehenderit Exc",
+    "portal_invite_last_accepted_at": null,
+    "tax_exempt": false
+  }
+}

@@ -32,17 +32,7 @@ describe 'ChargifySandbox' do
 
     describe 'POST /subscriptions.json' do
       it 'creates a new subscription' do
-        subscription = Chargify::Subscription.create(
-          :customer_reference => 'moklett',
-          :product_handle => 'chargify-api-ares-test',
-          :credit_card_attributes => {
-            :first_name => "Michael",
-            :last_name => "Klett",
-            :expiration_month => 1,
-            :expiration_year => 2020,
-            :full_number => "1"
-          }
-        )
+        subscription = Chargify::Subscription.create(customer_reference: 'moklett')
 
         expect(subscription.customer_reference).to eq('moklett')
       end
@@ -59,13 +49,76 @@ describe 'ChargifySandbox' do
       end
     end
 
-    describe 'DELETE /subscriptions/id.json' do
+    describe 'DELETE /subscriptions/:id.json' do
       it 'cancels the subscription' do
         subscription = Chargify::Subscription.find(2000)
         
         response = JSON.parse(subscription.cancel.body, symbolize_names: true)
 
         expect(response[:subscription][:state]).to eq('cancelled') 
+      end
+    end
+  end
+
+  describe 'Customers' do
+    describe 'GET /customers.json' do
+      it 'returns all customers' do
+        customers = Chargify::Customer.find(:all)
+
+        expect(customers.count).to eq(3)
+      end
+    end
+
+    describe 'GET /customers/:id.json' do
+      it 'returns a customer' do
+        customer = Chargify::Customer.find(1)
+
+        expect(customer.first_name).to eq('non')
+      end
+    end
+
+    describe 'GET /customers/lookup.json' do
+      it 'returns a customer by reference' do
+        customer = Chargify::Customer.find(1)
+        customer_by_reference = Chargify::Customer.find_by_reference('12345')
+
+        expect(customer).to eq(customer_by_reference)
+      end
+    end
+
+    describe 'POST /customers.json' do
+      it 'creates a new customer' do
+        customer = Chargify::Customer.create(first_name: "non")
+
+        expect(customer.first_name).to eq('non')
+      end
+    end
+
+    describe 'PUT /customers/:id.json' do
+      it 'updates the customer' do
+        customer = Chargify::Customer.find(1)
+        
+        customer.first_name = 'John'
+
+        expect(customer.save).to be_truthy
+      end
+    end
+
+    describe 'DELETE /customers/:id.json' do
+      it 'deletes a customer' do
+        customer = Chargify::Customer.find(1)
+        
+        expect(customer.destroy).to be_truthy
+      end
+    end
+
+    describe 'GET /customers/:id/subscriptions.json' do
+      it 'returns the customer subscriptions' do
+        customer = Chargify::Customer.find(1)
+
+        subscriptions = customer.subscriptions
+
+        expect(subscriptions.count).to eq(2)
       end
     end
   end
