@@ -50,7 +50,7 @@ module ChargifySandbox
     end
 
     get '/customers/:id/subscriptions.json' do
-      render :json , 'customer_subscriptions'
+      render :json , 'subscriptions'
     end
 
     private
