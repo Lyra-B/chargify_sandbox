@@ -122,6 +122,18 @@ describe 'ChargifySandbox' do
       end
     end
   end
-end
 
+  describe 'Payments' do
+    describe 'POST /subscriptions/:id/payments.json' do
+      it 'creates a payment' do
+        subscription = Chargify::Subscription.find_by_customer_reference('123')
+
+        payment = subscription.payment(amount_in_cents: 1000, memo: 'Example payment')
+
+        expect(payment.amount_in_cents).to eq(1000)
+        expect(payment.memo).to eq('Example payment')
+      end
+    end
+  end
+end
 

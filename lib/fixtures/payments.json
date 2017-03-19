@@ -1,0 +1,6 @@
+{
+  "payment": {
+    "amount": 1000,
+    "memo": "Example payment"
+  }
+}

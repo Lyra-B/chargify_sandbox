@@ -53,6 +53,10 @@ module ChargifySandbox
       render :json , 'subscriptions'
     end
 
+    post '/subscriptions/:id/payments.json' do
+      render :json, 'payments'
+    end
+
     private
 
     def render(type, filename)
